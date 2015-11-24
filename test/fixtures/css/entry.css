@@ -1,0 +1,7 @@
+.entry {
+  color: blue;
+  font-size: 3em;
+  text-align: center;
+}
+
+@import "./dep";
