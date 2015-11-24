@@ -28,10 +28,14 @@ Options:
 * wget https://github.com/zoubin/reduce-cli/raw/master/reduce.config.js
 * edit reduce.config.js
 * reduce-cli
+
     or
-* reduce-cli --watch
+
+  reduce-cli --watch
+
     or 
-* use it as a lib
+
+  use it as a lib
 ```
 var reduce = require('reduce')
 var r = new reduce();
