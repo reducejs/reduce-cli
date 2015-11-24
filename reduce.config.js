@@ -19,15 +19,17 @@ module.exports = {
     output: [
          fixtures('build'),
          null,
+         //Doc: https://github.com/zoubin/postcss-custom-url#util
          {
            maxSize: 0,
            useHash: false,
            assetOutFolder: fixtures('build/assets/i')
          }
     ],
+    //Doc: https://github.com/zoubin/reduce-css#api
     deps: {
-      //atDeps: 'deps',
       basedir: fixtures('src'),
+      //Doc: https://github.com/zoubin/factor-vinylify#options
       factor: {
         needFactor: true,
         common: 'common.css',
@@ -40,7 +42,9 @@ module.exports = {
         console.log(err);
       },
       instance: function (b) {
-        b.plugin(postcss);
+        b.plugin(postcss, {
+          processorFilter: [require('postcss-calc')],
+        });
       },
     },
   },
@@ -48,8 +52,10 @@ module.exports = {
     transforms: [],
     entry: '**/*.js',
     output: fixtures('build'),
+    //Doc: https://github.com/zoubin/reduce-js#api
     deps: {
       basedir: fixtures('src'),
+      //Doc: https://github.com/zoubin/factor-vinylify#options
       factor: {
         needFactor: true,
         common: 'common.js',
