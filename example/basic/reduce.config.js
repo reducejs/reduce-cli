@@ -26,15 +26,15 @@ module.exports = {
            assetOutFolder: fixtures('build/assets/i')
          }
     ],
+    basedir: fixtures('src'),
+    //Doc: https://github.com/zoubin/factor-vinylify#options
+    factor: {
+      needFactor: true,
+      common: 'common.css',
+      //threshold: 1,
+    },
     //Doc: https://github.com/zoubin/reduce-css#api
-    deps: {
-      basedir: fixtures('src'),
-      //Doc: https://github.com/zoubin/factor-vinylify#options
-      factor: {
-        needFactor: true,
-        common: 'common.css',
-        //threshold: 1,
-      },
+    reduce: {
     },
     on: {
       log: console.log.bind(console),
@@ -42,9 +42,10 @@ module.exports = {
         console.log(err);
       },
       instance: function (b) {
-        b.plugin(postcss, {
-          processorFilter: [require('postcss-calc')],
-        });
+        b.plugin(postcss);
+        //b.plugin(postcss, {
+          //processorFilter: [require('postcss-calc')],
+        //});
       },
     },
   },
@@ -52,15 +53,15 @@ module.exports = {
     transforms: [],
     entry: '**/*.js',
     output: fixtures('build'),
+    basedir: fixtures('src'),
+    //Doc: https://github.com/zoubin/factor-vinylify#options
+    factor: {
+      needFactor: true,
+      common: 'common.js',
+      //threshold: ['**/common.js'],
+    },
     //Doc: https://github.com/zoubin/reduce-js#api
-    deps: {
-      basedir: fixtures('src'),
-      //Doc: https://github.com/zoubin/factor-vinylify#options
-      factor: {
-        needFactor: true,
-        common: 'common.js',
-        //threshold: ['**/common.js'],
-      },
+    reduce: {
     },
     on: {
       log: console.log.bind(console),
