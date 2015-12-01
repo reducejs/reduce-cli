@@ -4,4 +4,6 @@
   text-align: center;
 }
 
-@import "./dep";
+.dep {
+  color: blue;
+}

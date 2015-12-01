@@ -11,7 +11,6 @@ module.exports = {
     //Doc: https://github.com/zoubin/factor-vinylify#options
     factor: {
       needFactor: true,
-      common: 'common.css',
     },
     on: {
       log: console.log.bind(console),
@@ -30,7 +29,6 @@ module.exports = {
     //Doc: https://github.com/zoubin/factor-vinylify#options
     factor: {
       needFactor: true,
-      common: 'common.js',
     },
     on: {
       log: console.log.bind(console),

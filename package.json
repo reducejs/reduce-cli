@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/zoubin/reduce-cli#readme",
   "dependencies": {
-    "callback-sequence": "^1.2.1",
+    "callback-sequence": "^2.0.0",
     "commander": "^2.9.0",
     "reduce-css": "^1.0.3",
     "reduce-css-postcss": "^1.0.5",
