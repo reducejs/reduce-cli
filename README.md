@@ -5,7 +5,13 @@ CLI for [reduce-css](https://github.com/zoubin/reduce-css) and [reduce-js](https
 
 ```
 npm install reduce-cli
-sudo npm link reduce-cli
+cd node_modules/reduce-cli
+sudo npm link
+```
+or
+
+```
+npm install -g reduce-cli
 ```
 
 # usage
