@@ -4,40 +4,31 @@ CLI for [reduce-css](https://github.com/zoubin/reduce-css) and [reduce-js](https
 # install
 
 ```
-sudo npm install -g reduce-cli
+npm install reduce-cli
+sudo npm link reduce-cli
 ```
 
 # usage
 
 ```
-Options:
-        --watch, -w  Bundle and start watching for changes.
-                     (with watch options in the config file)
-
-       --config, -c  Specify the config file. The default config file is
-                     reduce.config.js
-
-         --help, -h  Show this message
-
-      --version, -v  Show the current version
+reduce -h
 ```
 
 # example
 
-* cd your_project
-* wget https://github.com/zoubin/reduce-cli/raw/master/reduce.config.js
-* edit reduce.config.js
-* reduce-cli
+See the examples in the `example` directory.
 
-    or
+Run `reduce` in the example directory to check the output files.
 
-  reduce-cli --watch
-
-    or 
-
-  use it as a lib
 ```
-var reduce = require('reduce')
+cd example/base
+reduce
+ls -lR build
+```
+
+# use it as a lib
+```
+var reduce = require('reduce-cli')
 var r = new reduce();
 
 // bundle
