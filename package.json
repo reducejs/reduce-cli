@@ -2,17 +2,14 @@
   "name": "reduce",
   "version": "0.0.1",
   "description": "A command line wrapper for reduce-css and reduce-js",
-  "main": "lib/main",
+  "main": "index.js",
   "bin": {
     "reduce": "bin/reduce-cli.js"
   },
   "scripts": {
-    "test": "npm run lint && task-tape test/*.js | tap-summary",
-    "lint": "eslint *.js lib/**/*.js test/*.js bin/*.js",
-    "coverage": "istanbul cover -i 'lib/**/*.js' -i '*.js' --print both task-tape -- test/*.js",
-    "check-coverage": "istanbul check-coverage --statements 90 --functions 90 --branches 85 --lines 90",
-    "upload-coverage": "cat ./coverage/lcov.info | coveralls",
-    "cover": "npm run coverage && npm run check-coverage && npm run upload-coverage"
+    "test": "npm run lint && tap --cov test/*.js",
+    "lint": "eslint *.js 'lib/**/*.js' test/*.js bin/*.js",
+    "coveralls": "COVERALLS_REPO_TOKEN=REPO_TOKEN npm test"
   },
   "repository": {
     "type": "git",
@@ -28,21 +25,18 @@
     "url": "https://github.com/zoubin/reduce-cli/issues"
   },
   "homepage": "https://github.com/zoubin/reduce-cli#readme",
+  "devDependencies": {
+    "del": "^2.1.0",
+    "eslint": "^1.10.1",
+    "tap": "^2.3.1"
+  },
   "dependencies": {
     "callback-sequence": "^2.0.0",
     "commander": "^2.9.0",
+    "node-promisify": "^1.0.0",
     "reduce-css": "^1.0.3",
     "reduce-css-postcss": "^1.0.5",
     "reduce-js": "^3.0.1",
     "util-mix": "^3.0.2"
-  },
-  "devDependencies": {
-    "del": "^2.0.2",
-    "coveralls": "^2.11.4",
-    "eslint": "^1.10.1",
-    "istanbul": "^0.4.0",
-    "tap-summary": "^1.0.0",
-    "tape": "^4.2.0",
-    "task-tape": "^1.0.0"
   }
 }

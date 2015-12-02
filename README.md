@@ -35,17 +35,14 @@ ls -lR build
 # use it as a lib
 ```
 var reduce = require('reduce-cli')
-var r = new reduce();
 
 // bundle
-r.run()
+reduce()
 
 // bundle with a callback function
-r.run({}, function(){
-  console.log("done")
-})
+reduce().then(callback).catch(handle_error)
 
 // bundle and watch
-r.watch()
+reduce.watch()
 
 ```

@@ -6,8 +6,10 @@ var fixtures = path.resolve.bind(path, __dirname)
 
 module.exports = {
   css: {
-    entry: "**/*.css",
-    output: fixtures('build'),
+    entry: '**/*.css',
+    output: {
+      dir: fixtures('build'),
+    },
     basedir: fixtures('src'),
     //Doc: https://github.com/zoubin/factor-vinylify#options
     factor: {
@@ -17,7 +19,7 @@ module.exports = {
     on: {
       log: console.log.bind(console),
       error: function (err) {
-        console.log(err);
+        console.log(err)
       },
       instance: function (b) {
         b.plugin(postcss, {

@@ -1,4 +1,4 @@
-var test = require('tape')
+var tap = require('tap')
 var fs = require('fs')
 var reduce = require('../lib/main')
 var del = require('del')
@@ -15,25 +15,23 @@ var cssf = fixtures(output, 'css', 'entry.css')
 var jse = fixtures(src, 'js', 'entry-expect.js')
 var csse = fixtures(src, 'css', 'entry-expect.css')
 
-test('empty config', function (t) {
+tap.test('empty config', function (t) {
   t.plan(1)
   del(output)
-  var r = new reduce('notexist.js')
-  r.run({}, function () {
-    fs.stat(output, function(err, stats) {
-      t.false(!err && stats.isDirectory())
-    })
+  reduce().catch(function (err) {
+    t.true(err)
   })
 })
 
-test('css only config', function (t) {
+tap.test('css only config', function (t) {
   t.plan(1)
   del(output)
-  var r = new reduce('notexist.js')
-  r.run({
+  reduce({
     css: {
       entry: '**/*.css',
-      output: output,
+      output: {
+        dir: output,
+      },
       basedir: src,
       factor: {
         needFactor: true,
@@ -43,8 +41,7 @@ test('css only config', function (t) {
           b.plugin(postcss)
         },
       },
-    }},
-    function () {
+    }}).then(function () {
       t.equal(
         fs.readFileSync(cssf, 'utf8'),
         fs.readFileSync(csse, 'utf8')
@@ -53,20 +50,20 @@ test('css only config', function (t) {
     })
 })
 
-test('js only config', function (t) {
+tap.test('js only config', function (t) {
   t.plan(1)
   del(output)
-  var r = new reduce('notexist.js')
-  r.run({
+  reduce({
     js: {
       entry: '**/*.js',
-      output: output,
+      output: {
+        dir: output,
+      },
       basedir: src,
       factor: {
         needFactor: true,
       },
-    }},
-    function () {
+    }}).then(function () {
       t.equal(
         fs.readFileSync(jsf, 'utf8'),
         fs.readFileSync(jse, 'utf8')
@@ -75,12 +72,11 @@ test('js only config', function (t) {
     })
 })
 
-test('command line', function (t) {
+tap.test('command line', function (t) {
   var pk = require('../package.json')
   t.plan(2)
-  cp.exec('node ' + fixtures('..', 'bin', 'reduce-cli.js') + ' -v', {}, function(err, stdout) {
+  cp.exec('node ' + fixtures('..', 'bin', 'reduce-cli.js') + ' -V', {}, function(err, stdout) {
     t.false(err)
     t.equal(stdout, pk.version + '\n')
   })
 })
-

@@ -1,28 +1,19 @@
 #!/usr/bin/env node
 
 var reduce = require('../lib/main')
+var version = require('../package.json').version
 var program = require('commander')
 
 program
-  .option('-v, --vers', 'Show the current version')
+  .version(version)
   .option('-c, --config <filename>', 'Specify the config file. The default config file is reduce.config.js')
   .option('-w, --watch', 'Bundle and start watching for changes. With watch options in the config file')
   .parse(process.argv)
 
-if (program.vers) {
-  console.log(require('../package.json').version)
-  process.exit()
-}
-
-var r = new reduce(program.config)
-
-if (!r.cfg.css && !r.cfg.js) {
-  console.log("please check 'reduce.config.js' file.")
-  process.exit(1)
-}
-
 if (program.watch) {
-  r.watch()
+  reduce.watch(program.config)
 } else {
-  r.run()
+  reduce(program.config).catch(function(e) {
+    console.error(e.message)
+  })
 }
