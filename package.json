@@ -1,0 +1,42 @@
+{
+  "name": "reduce",
+  "version": "0.0.1",
+  "description": "A command line wrapper for reduce-css and reduce-js",
+  "main": "index.js",
+  "bin": {
+    "reduce": "bin/reduce-cli.js"
+  },
+  "scripts": {
+    "test": "npm run lint && tap --cov test/*.js",
+    "lint": "eslint *.js 'lib/**/*.js' test/*.js bin/*.js",
+    "coveralls": "COVERALLS_REPO_TOKEN=REPO_TOKEN npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoubin/reduce-cli.git"
+  },
+  "keywords": [
+    "browserify",
+    "cli"
+  ],
+  "author": "zoubin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zoubin/reduce-cli/issues"
+  },
+  "homepage": "https://github.com/zoubin/reduce-cli#readme",
+  "devDependencies": {
+    "del": "^2.1.0",
+    "eslint": "^1.10.1",
+    "tap": "^2.3.1"
+  },
+  "dependencies": {
+    "callback-sequence": "^2.0.0",
+    "commander": "^2.9.0",
+    "node-promisify": "^1.0.0",
+    "reduce-css": "^1.0.3",
+    "reduce-css-postcss": "^1.0.5",
+    "reduce-js": "^3.0.1",
+    "util-mix": "^3.0.2"
+  }
+}

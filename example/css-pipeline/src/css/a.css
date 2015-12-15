@@ -1,0 +1,9 @@
+@deps "./reset";
+@import "color";
+$x: 30em;
+$y: 20em;
+a{
+  color: $red;
+  padding: calc($x - $y);
+}
+
