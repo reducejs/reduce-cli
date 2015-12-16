@@ -3,4 +3,4 @@
 npm-debug.log
 build/
 coverage/
-.*.swp
+.nyc_output/
