@@ -1,5 +1,5 @@
 {
-  "name": "reduce",
+  "name": "reduce-cli",
   "version": "0.1.0",
   "description": "A command line wrapper for reduce-css and reduce-js",
   "main": "index.js",
