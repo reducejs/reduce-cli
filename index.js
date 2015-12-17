@@ -1,86 +1,56 @@
-var path = require('path')
-var fs = require('fs')
-var reducecss = require('reduce-css')
-var reducejs = require('reduce-js')
-var parallel = require('callback-sequence').parallel
-var mix = require('util-mix')
-var promisify = require('node-promisify')
+var createJsBundler = require('./lib/js-bundler')
+var createCssBundler = require('./lib/css-bundler')
+var mix = require('mixy')
 
-var promisifyStat = promisify(fs.stat)
+module.exports = function (opts) {
+  opts = opts || {}
 
-function _load_config(config) {
-  if (typeof config === 'object') {
-    return Promise.resolve(config)
+  var jsBundler = opts.js
+    ? createJsBundler(normalize(opts.js, opts), opts.watch)
+    : noopBundler()
+
+  var cssBundler = opts.css
+    ? createCssBundler(normalize(opts.css, opts), opts.watch)
+    : noopBundler()
+
+  function bundler() {
+    return Promise.all([jsBundler(), cssBundler()])
   }
 
-  var cfgName = config || 'reduce.config.js'
-  var cfgPath = path.resolve(process.cwd(), cfgName)
+  function watch(cb) {
+    jsBundler.watch(cb)
+    cssBundler.watch(cb)
+  }
 
-  return promisifyStat(cfgPath).then(function () {
-    return require(cfgPath)
-  })
+  bundler.watch = watch
+
+  return bundler
 }
 
-function Reduce(config) {
-  return _load_config(config).then(function (cfg) {
-    var c = mix({}, this.cfg, cfg)
-    var jobs = []
+// `extra` is common options for `js` and `css`
+function normalize(opts, extra) {
+  opts = opts || {}
 
-    var cssjob = function() {
-      return bundle(c.css, reducecss)
-      .pipe(getPipeline(c.css, reducecss)())
-    }
-    var jsjob = function() {
-      return bundle(c.js, reducejs)
-      .pipe(getPipeline(c.js, reducejs)())
-    }
+  opts.on = mix({}, opts.on, extra.on)
 
-    if (c.css) {
-      jobs.push(cssjob)
-    }
+  if (!opts.basedir) {
+    opts.basedir = extra.basedir
+  }
 
-    if (c.js) {
-      jobs.push(jsjob)
-    }
-
-    return parallel(jobs)
-  })
-}
-
-Reduce.watch = function(config) {
-  return _load_config(config).then(function (cfg) {
-    var c = mix({}, this.cfg, cfg)
-    if (c.css) {
-      bundle(c.css, reducecss.watch(c.css.watch || c.watch))
-      .pipe(getPipeline(c.css, reducecss))
-    }
-    if (c.js) {
-      bundle(c.js, reducejs.watch(c.js.watch || c.watch))
-      .pipe(getPipeline(c.js, reducejs))
-    }
-  })
-}
-
-function bundle(opts, r) {
-  [].concat(Object.keys(opts.on || {})).filter(Boolean).forEach(function(element) {
-    r.on(element, opts.on[element])
-  })
+  if (!opts.paths) {
+    opts.paths = extra.paths
+  }
 
   opts.reduce = opts.reduce || {}
-  opts.reduce.basedir = opts.basedir
-  opts.reduce.factor = opts.factor
 
-  return r.src(opts.entry, opts.reduce)
+  return opts
 }
 
-function getPipeline(opts, r) {
-  var transforms = r.lazypipe()
-
-  ;[].concat(opts.transforms).filter(Boolean).forEach(function(element) {
-    transforms = transforms.pipe.apply(transforms, element)
-  })
-
-  return transforms.pipe.call(transforms, r.dest, opts.output.dir, opts.output.opts, opts.output.assets)
+function noopBundler() {
+  var noop = function () {
+    return Promise.resolve()
+  }
+  noop.watch = noop
+  return noop
 }
 
-module.exports = Reduce
