@@ -1,4 +1,10 @@
-<!-- 08402d6 1450349953000 -->
+<!-- 67d2ae4 1450350093000 -->
+
+## [v0.1.1](https://github.com/zoubin/reduce-cli/commit/67d2ae4) (2015-12-17)
+
+* [[`b395db9`](https://github.com/zoubin/reduce-cli/commit/b395db9)] Fix package name
+
+* [[`1e8296f`](https://github.com/zoubin/reduce-cli/commit/1e8296f)] CHANGELOG
 
 ## [v0.1.0](https://github.com/zoubin/reduce-cli/commit/08402d6) (2015-12-17)
 
