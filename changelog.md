@@ -1,4 +1,10 @@
-<!-- 67d2ae4 1450350093000 -->
+<!-- 9a05799 1451454101000 -->
+
+## [v0.2.0](https://github.com/zoubin/reduce-cli/commit/9a05799) (2015-12-30)
+
+* [[`518e8ef`](https://github.com/zoubin/reduce-cli/commit/518e8ef)] Update reduce-js and reduce-css
+
+* [[`a77f7db`](https://github.com/zoubin/reduce-cli/commit/a77f7db)] CHANGELOG
 
 ## [v0.1.1](https://github.com/zoubin/reduce-cli/commit/67d2ae4) (2015-12-17)
 
