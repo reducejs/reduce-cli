@@ -29,16 +29,13 @@
     "del": "^2.1.0",
     "eslint": "^1.10.1",
     "gulp": "^3.9.0",
-    "tap": "^2.3.1"
+    "tap": "^3.0.0"
   },
   "dependencies": {
     "commander": "^2.9.0",
     "mixy": "^1.0.0",
-    "multimatch": "^2.1.0",
-    "node-promisify": "^1.0.0",
-    "reduce-css": "^2.0.2",
+    "reduce-css": "^3.0.0",
     "reduce-css-postcss": "^2.0.0",
-    "reduce-js": "^4.0.0",
-    "through2": "^2.0.0"
+    "reduce-js": "^5.0.0"
   }
 }
