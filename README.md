@@ -383,7 +383,7 @@ Specify options for bundling css.
 
 [`reduce-css`]: https://github.com/zoubin/reduce-css
 [`reduce-css-postcss`]: https://github.com/zoubin/reduce-css-postcss
-[`reduce-js`]: https://github.com/zoubin/reduce-js.
+[`reduce-js`]: https://github.com/zoubin/reduce-js
 [`gulp`]: https://github.com/gulpjs/gulp
 [`globby`]: https://github.com/sindresorhus/globby
 [`reduce-js#dest`]: https://github.com/zoubin/reduce-js#reducedest
